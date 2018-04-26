@@ -1,0 +1,26 @@
+[
+ {
+		"title": "系统设置管理",
+		"icon": "&#x1002;",
+		"spread": false,
+		"children": [
+			{
+				"title": "问题咨询管理",
+				"icon": "fa-check-square-o",
+				"href": "/admin/reflection/list"
+			},{
+            "title": "模块设置",
+            "icon": "fa-check-square-o",
+            "href": "/admin/setting/list"
+          },{
+            "title": "推送消息",
+            "icon": "fa-check-square-o",
+            "href": "/admin/imformation/list"
+          },{
+            "title": "CMS管理",
+            "icon": "fa-check-square-o",
+            "href": "/admin/cms/list"
+          }
+		]
+	}
+ ]

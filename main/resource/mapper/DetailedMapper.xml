@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.DetailedMapper">
+  <resultMap id="BaseResultMap" type="com.pojo.Detailed">
+    <id column="detailed_id" jdbcType="INTEGER" property="detailedId" />
+    <result column="detailed_name" jdbcType="VARCHAR" property="detailedName" />
+    <result column="detailed_photo" jdbcType="VARCHAR" property="detailedPhoto" />
+    <result column="second_id" jdbcType="INTEGER" property="secondId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.pojo.Detailed">
+    <result column="detailed_comment" jdbcType="LONGVARCHAR" property="detailedComment" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    detailed_id, detailed_name, detailed_photo, second_id
+  </sql>
+  <sql id="Blob_Column_List">
+    detailed_comment
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.pojo.DetailedExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from detailed
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.pojo.DetailedExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from detailed
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from detailed
+    where detailed_id = #{detailedId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from detailed
+    where detailed_id = #{detailedId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pojo.DetailedExample">
+    delete from detailed
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pojo.Detailed">
+    insert into detailed (detailed_id, detailed_name, detailed_photo, 
+      second_id, detailed_comment)
+    values (#{detailedId,jdbcType=INTEGER}, #{detailedName,jdbcType=VARCHAR}, #{detailedPhoto,jdbcType=VARCHAR}, 
+      #{secondId,jdbcType=INTEGER}, #{detailedComment,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pojo.Detailed">
+    insert into detailed
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="detailedId != null">
+        detailed_id,
+      </if>
+      <if test="detailedName != null">
+        detailed_name,
+      </if>
+      <if test="detailedPhoto != null">
+        detailed_photo,
+      </if>
+      <if test="secondId != null">
+        second_id,
+      </if>
+      <if test="detailedComment != null">
+        detailed_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="detailedId != null">
+        #{detailedId,jdbcType=INTEGER},
+      </if>
+      <if test="detailedName != null">
+        #{detailedName,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedPhoto != null">
+        #{detailedPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="secondId != null">
+        #{secondId,jdbcType=INTEGER},
+      </if>
+      <if test="detailedComment != null">
+        #{detailedComment,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pojo.DetailedExample" resultType="java.lang.Long">
+    select count(*) from detailed
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update detailed
+    <set>
+      <if test="record.detailedId != null">
+        detailed_id = #{record.detailedId,jdbcType=INTEGER},
+      </if>
+      <if test="record.detailedName != null">
+        detailed_name = #{record.detailedName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailedPhoto != null">
+        detailed_photo = #{record.detailedPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondId != null">
+        second_id = #{record.secondId,jdbcType=INTEGER},
+      </if>
+      <if test="record.detailedComment != null">
+        detailed_comment = #{record.detailedComment,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update detailed
+    set detailed_id = #{record.detailedId,jdbcType=INTEGER},
+      detailed_name = #{record.detailedName,jdbcType=VARCHAR},
+      detailed_photo = #{record.detailedPhoto,jdbcType=VARCHAR},
+      second_id = #{record.secondId,jdbcType=INTEGER},
+      detailed_comment = #{record.detailedComment,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update detailed
+    set detailed_id = #{record.detailedId,jdbcType=INTEGER},
+      detailed_name = #{record.detailedName,jdbcType=VARCHAR},
+      detailed_photo = #{record.detailedPhoto,jdbcType=VARCHAR},
+      second_id = #{record.secondId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pojo.Detailed">
+    update detailed
+    <set>
+      <if test="detailedName != null">
+        detailed_name = #{detailedName,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedPhoto != null">
+        detailed_photo = #{detailedPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="secondId != null">
+        second_id = #{secondId,jdbcType=INTEGER},
+      </if>
+      <if test="detailedComment != null">
+        detailed_comment = #{detailedComment,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where detailed_id = #{detailedId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pojo.Detailed">
+    update detailed
+    set detailed_name = #{detailedName,jdbcType=VARCHAR},
+      detailed_photo = #{detailedPhoto,jdbcType=VARCHAR},
+      second_id = #{secondId,jdbcType=INTEGER},
+      detailed_comment = #{detailedComment,jdbcType=LONGVARCHAR}
+    where detailed_id = #{detailedId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pojo.Detailed">
+    update detailed
+    set detailed_name = #{detailedName,jdbcType=VARCHAR},
+      detailed_photo = #{detailedPhoto,jdbcType=VARCHAR},
+      second_id = #{secondId,jdbcType=INTEGER}
+    where detailed_id = #{detailedId,jdbcType=INTEGER}
+  </update>
+</mapper>

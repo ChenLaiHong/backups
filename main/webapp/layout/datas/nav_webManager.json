@@ -1,0 +1,59 @@
+[
+  {
+    "title": "信息管理",
+    "icon": "&#x1002;",
+    "spread": false,
+    "children": [
+      {
+        "title": "深爱保信息",
+        "icon": "fa-check-square-o",
+        "href": "/admin/information/listUI"
+      },
+      {
+        "title": "反馈信息管理",
+        "icon": "fa-check-square-o",
+        "href": "/admin/feedback/listUI"
+      }
+    ]
+  },
+  {
+		"title": "图管理",
+		"icon": "&#x1002;",
+		"spread": false,
+		"children": [
+			{
+				"title": "轮播图管理",
+				"icon": "fa-check-square-o",
+				"href": "/admin/banner/list"
+			},{
+                "title": "海报管理",
+                "icon": "fa-check-square-o",
+                "href": "/admin/poster/list"
+          },{
+            "title": "推广管理",
+            "icon": "fa-check-square-o",
+            "href": "/admin/popularize/list"
+          }
+		]
+  },
+  {
+    "title": "客服咨询管理",
+    "icon": "&#x1002;",
+    "spread": false,
+    "children": [
+      {
+        "title": "一级菜单管理",
+        "icon": "fa-check-square-o",
+        "href": "/admin/category/list"
+      },{
+        "title": "二级菜单管理",
+        "icon": "fa-check-square-o",
+        "href": "/admin/second/list"
+      },{
+        "title": "信息详情管理",
+        "icon": "fa-check-square-o",
+        "href": "/admin/detailed/list"
+      }
+    ]
+  }
+]

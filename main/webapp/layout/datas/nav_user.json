@@ -1,0 +1,41 @@
+[
+	{
+		"title": "管理员管理",
+		"icon": "&#x1002;",
+		"spread": false,
+		"children": [
+			{
+				"title": "管理员列表",
+				"icon": "fa-check-square-o",
+				"href": "/admin/listUI"
+			}
+		]
+	},
+	{
+		"title": "用户管理",
+		"icon": "&#x1002;",
+		"spread": false,
+		"children": [
+			{
+				"title": "用户列表",
+				"icon": "fa-check-square-o",
+				"href": "/admin/user/listUI"
+			},
+			{
+				"title": "需求方列表",
+				"icon": "fa-check-square-o",
+				"href": "/admin/userDemand/listUI"
+			},
+			{
+				"title": "个人投资者列表",
+				"icon": "fa-check-square-o",
+				"href": "/admin/userInvestment/listUI"
+			},
+			{
+				"title": "机构投资方列表",
+				"icon": "fa-check-square-o",
+				"href": "/admin/userMechanism/listUI"
+			}
+		]
+	}
+ ]
