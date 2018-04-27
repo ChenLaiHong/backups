@@ -122,6 +122,8 @@
                     arr.push('<td><a href="${pageContext.request.contextPath}/admin/banner/detail?id='+ item +'"class="layui-btn">状态修改</a>' +
                         ' <a href="${pageContext.request.contextPath}/admin/banner/updateUI?bannerId='+ item +'"class="layui-btn layui-btn-normal">编辑</a>' +
                         ' <a href="${pageContext.request.contextPath}/admin/banner/delete?bannerId='+ item +'"data-id="1" data-opt="del" class="layui-btn layui-btn-danger">删除</a></td>');
+                }else if (index % 4 ==0){
+                    arr.push('<td><img src="${pageContext.request.contextPath}/layout/file/banner/'+ item +'" width="100px" height="100px"></td>');
                 }else{
                     arr.push('<td>'+ item +'</td>');
                 }
@@ -139,7 +141,7 @@
                 //得到了当前页，用于向服务端请求对应数据
                 if(!first){
                     $.ajax({
-                        type:'get',
+                        type:'post',
                         async:true,
                         url:"${pageContext.request.contextPath}/admin/banner/asynList",
                         data:{"num":nums/4,"curr":obj.curr-1},

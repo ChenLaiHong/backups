@@ -91,7 +91,7 @@ public class BannerController {
      * 文章分类异步
      * @return
      */
-    @RequestMapping(value = "/asynList")
+    @RequestMapping(value = "/asynList",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public void bannerAsynList(@RequestParam(value = "num",required = false)Integer num,HttpServletResponse response,
                                 @RequestParam(value = "curr",required = false)Integer curr){

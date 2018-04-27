@@ -17,4 +17,8 @@ public interface InformationService {
     String getPhoto(int int_id);
 
     String getPublicPhoto(int int_id);
+
+    Information selectInformationById(int id);
+
+    void updateInformation(Information information);
 }

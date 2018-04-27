@@ -48,4 +48,14 @@ public class InformationServiceImpl implements InformationService {
         Information information = this.informationMapper.selectByPrimaryKey(int_id);
         return information.getPublicPhoto();
     }
+
+    @Override
+    public Information selectInformationById(int id) {
+        return this.informationMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void updateInformation(Information information) {
+        informationMapper.updateByPrimaryKey(information);
+    }
 }

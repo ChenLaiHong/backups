@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -95,7 +94,7 @@
                 //得到了当前页，用于向服务端请求对应数据
                 if(!first){
                     $.ajax({
-                        type:'get',
+                        type:'post',
                         async:true,
                         url:"${pageContext.request.contextPath}/admin/information/list",
                         data:{"num":nums/rowData,"curr":obj.curr-1},
@@ -107,7 +106,7 @@
                 }else {
                     //第一页
                     $.ajax({
-                        type:'get',
+                        type:'post',
                         async:true,
                         url:"${pageContext.request.contextPath}/admin/information/list",
                         data:{"num":nums/rowData,"curr":obj.curr-1},
@@ -158,6 +157,7 @@
                 }
                 if((index+1) % rowData == 0 || (index+1) % rowData == rowData){
                     arr.push('<td> ' +
+                        '<a href="javascript:void(0)"  id="'+item+'" class="layui-btn-normal layui-btn detail-row">图</a> ' +
                         '<a href="javascript:void(0)"  id="'+item+'" class="layui-btn-normal layui-btn update-row">  编辑  </a> ' +
                         '<a href="javascript:void(0)"  id="'+item+'" data-id="1" data-opt="del" class="layui-btn layui-btn-danger delete-delete">删除</a> ' +
                         '</td>')
@@ -271,6 +271,36 @@
                     location.reload();
                     return false;
                 }
+            });
+        });
+
+        $('#inforTable').on('click', 'a.detail-row',function() {
+            var id =$(this).attr("id");
+            $.get('${pageContext.request.contextPath}/admin/information/detail', {"id" :id}, function(form) {
+                layer.open({
+                    type: 1,
+                    title: '图片信息',
+                    content: form,
+                    area: ['40%','50%'],
+                    maxmin: true,
+                   /* end: function() {
+                        location.reload();
+                    },*/
+                    yes: function(index) {
+                        console.log(index);
+                    },
+                    full: function(elem) {
+                        var win = window.top === window.self ? window : parent.window;
+                        $(win).on('resize', function() {
+                            var $this = $(this);
+                            elem.width($this.width()).height($this.height()).css({
+                                top: 0,
+                                left: 0
+                            });
+                            elem.children('div.layui-layer-content').height($this.height() - 95);
+                        });
+                    }
+                });
             });
         });
 

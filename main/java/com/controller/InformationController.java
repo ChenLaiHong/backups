@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by CHLaih on 2018/4/26.
@@ -36,7 +37,7 @@ public class InformationController {
         model.addAttribute("count", this.informationService.getCount());
         return "/admin/information/informationManagement";
     }
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list",method = RequestMethod.POST,produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String list(@RequestParam(value = "num",required = false)Integer num, @RequestParam(value = "curr",required = false)Integer curr, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
@@ -60,7 +61,25 @@ public class InformationController {
         }
         return new AjaxResult(false, "添加失败");
     }
+    @RequestMapping(value = "/detail")
+    public String informationDetail(@RequestParam(value = "id")String id,Map<String, Object> map){
+        int int_id = Integer.parseInt(id);
+        map.put("information",informationService.selectInformationById(int_id));
+        return "admin/information/informationDetail";
+    }
 
+    @RequestMapping(value = "/updateUI")
+    public String updateArticleUI(Map<String, Object> map,@RequestParam(value = "id")String id){
+
+        int int_id = Integer.parseInt(id);
+        map.put("information",informationService.selectInformationById(int_id));
+        return "admin/information/informationSaveUI";
+    }
+    @RequestMapping(value = "/update")
+    public String updateInformation(Information information){
+        informationService.updateInformation(information);
+        return "redirect:/admin/information/informationManagement";
+    }
     @RequestMapping({"/updatePhoto"})
     @ResponseBody
     public AjaxResult updatePhoto(@RequestParam("photo") MultipartFile file, @RequestParam("id") String id) {
