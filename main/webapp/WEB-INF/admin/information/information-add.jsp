@@ -16,7 +16,12 @@
         <legend>添加信息</legend>
     </fieldset>
     <form id="informationAdd" action="" class="layui-form" type="post">
-
+        <div class="layui-form-item">
+            <label class="layui-form-label">图片</label>
+            <input class="layui-upload-file" id="photo_up" name="photo" type="file">
+            <img id="photo_upload" src="" alt=" " style="height: 50px;width: 50px">
+            <input id="photo" name="photo" type="hidden" lay-verify="photo">
+        </div>
         <div class="layui-form-item">
             <label class="layui-form-label">名称</label>
             <div class="layui-input-block">
@@ -43,13 +48,6 @@
             <div class="layui-input-block">
                 <textarea id="introduce" name="introduce" lay-verify="introduce" placeholder="请输入介绍" autocomplete="off" class="layui-textarea"></textarea>
             </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">图片</label>
-            <input class="layui-upload-file" id="photo_up" name="photo" type="file">
-            <img id="photo_upload" src="" alt=" " style="height: 50px;width: 50px">
-            <input id="photo" name="photo" type="hidden" lay-verify="photo">
         </div>
 
         <div class="layui-form-item">

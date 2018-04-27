@@ -2,6 +2,7 @@ package com.service.impl;
 
 import com.dao.InformationMapper;
 import com.pojo.Information;
+import com.pojo.InformationExample;
 import com.service.InformationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,7 +56,21 @@ public class InformationServiceImpl implements InformationService {
     }
 
     @Override
-    public void updateInformation(Information information) {
-        informationMapper.updateByPrimaryKey(information);
+    public int updateInformation(Information information) {
+        return informationMapper.updateByPrimaryKey(information);
+    }
+
+    @Override
+    public int delete(Integer id) {
+        return informationMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Information> search(String searchValue) {
+        InformationExample informationExample = new InformationExample();
+        informationExample.createCriteria().andCategoryLike("%"+searchValue+"%");
+        informationExample.or().andNameLike("%"+searchValue+"%");
+        informationExample.or().andNewsLike("%"+searchValue+"%");
+        return informationMapper.selectByExample(informationExample);
     }
 }

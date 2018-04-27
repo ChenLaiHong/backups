@@ -20,5 +20,9 @@ public interface InformationService {
 
     Information selectInformationById(int id);
 
-    void updateInformation(Information information);
+    int updateInformation(Information information);
+
+    int delete(Integer id);
+
+    List<Information> search(String searchValue);
 }

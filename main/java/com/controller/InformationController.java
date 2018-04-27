@@ -75,11 +75,36 @@ public class InformationController {
         map.put("information",informationService.selectInformationById(int_id));
         return "admin/information/informationSaveUI";
     }
+
     @RequestMapping(value = "/update")
-    public String updateInformation(Information information){
-        informationService.updateInformation(information);
-        return "redirect:/admin/information/informationManagement";
+    public AjaxResult updateInformation(Information information){
+        int result = this.informationService.updateInformation(information);
+        if (result != 0) {
+            return new AjaxResult(true, "修改成功");
+        }
+        return new AjaxResult(false, "修改失败");
+
     }
+
+    @RequestMapping({"/delete"})
+    @ResponseBody
+    public AjaxResult delete(Integer id) {
+        int result = this.informationService.delete(id);
+        if (result != 0) {
+            return new AjaxResult(true, "删除成功");
+        }
+        return new AjaxResult(false, "删除失败");
+    }
+
+    @RequestMapping(value = "/search",produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String search(String searchValue) {
+        if ("".equals(searchValue)){
+            return "0";
+        }
+        return JsonUtil.objectToJson(this.informationService.search(searchValue));
+    }
+
     @RequestMapping({"/updatePhoto"})
     @ResponseBody
     public AjaxResult updatePhoto(@RequestParam("photo") MultipartFile file, @RequestParam("id") String id) {
